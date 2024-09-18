@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .logo::first-letter {
+    @apply text-zinc-500;
+  }
+}
