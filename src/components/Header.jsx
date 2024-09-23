@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import avatar from "../assets/avatar.png"
+
 const Header = () => {
   return (
     <nav className="w-full flex flex-wrap items-center justify-between mx-auto p-4">
@@ -17,11 +19,7 @@ const Header = () => {
           className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
         >
           <span className="sr-only"> user</span>
-          <img
-            className="w-8 h-8 rounded-full"
-            src="/docs/images/people/profile-picture-3.jpg"
-            alt="user photo"
-          />
+          <img className="w-8 h-8 rounded-full" src={avatar} alt="user photo" />
         </button>
       </div>
     </nav>
