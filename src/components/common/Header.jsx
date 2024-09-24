@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import avatar from "../assets/avatar.png"
+import avatar from "../../assets/avatar.png"
 
 const Header = () => {
   return (

@@ -1,28 +1,16 @@
-import React, { useState, useEffect } from "react";
-import ProductTable from "../components/ProductTable";
-import CategorySelector from "../components/CategorySelector";
-import useProducts from "../hooks/useProducts";
+import React, { useState } from "react";
+import ProductTable from "../components/products/ProductTable";
+import CategorySelector from "../components/products/CategorySelector";
 import { Link } from "react-router-dom";
-import { Loading } from "../components/common/Loading";
-import { Error } from "../components/common/Error";
 import { PlusIcon } from "lucide-react";
 
-const Products = () => {
+const Products = ({ products, getProducts, removeProduct }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
-  const { products, loading, error, removeProduct, getProducts } =
-    useProducts(selectedCategory);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-    getProducts(category);
+    getProducts(category); // Fetch products for the selected category
   };
-
-  useEffect(() => {
-    getProducts(selectedCategory);
-  }, []);
-
-  if (loading) return <Loading />;
-  if (error) return <Error message={error} />;
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

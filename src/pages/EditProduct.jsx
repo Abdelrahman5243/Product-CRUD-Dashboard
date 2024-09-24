@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ProductForm from "../components/ProductForm";
+import ProductForm from "../components/products/ProductForm";
 import useProducts from "../hooks/useProducts";
 import { Loading } from "../components/common/Loading";
 

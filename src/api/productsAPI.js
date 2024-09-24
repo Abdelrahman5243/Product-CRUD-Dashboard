@@ -21,7 +21,6 @@ export const fetchProducts = async (category = "") => {
   }
 };
 
-
 export const fetchProductsById = async (id) => {
   try {
     const response = await apiClient.get(`/products/${id}`);
@@ -33,7 +32,13 @@ export const fetchProductsById = async (id) => {
 
 export const createProduct = async (product) => {
   try {
-    const response = await apiClient.post("/products", product);
+    const response = await apiClient.post("/products", {
+      ...product,
+      rating: {
+        rate:0,
+        count: 0,
+      },
+    });
     return response.data;
   } catch (error) {
     throw new Error(`Error creating product: ${error.message}`);
