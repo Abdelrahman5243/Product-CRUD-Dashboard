@@ -95,7 +95,7 @@ const ProductForm = ({
       <div className="flex items-center space-x-4">
         <button
           type="submit"
-          className={`py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg
+          className={`p-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg
             border border-gray-200 hover:bg-gray-100 hover:text-blue-700 ${
               loading ? "opacity-50 cursor-not-allowed" : ""
             }`}
@@ -111,7 +111,8 @@ const ProductForm = ({
         {updateProduct && handleDelete && (
           <button
             type="button"
-            className={`text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 ${
+            className={`p-3 text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 
+              focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm text-center ${
               loading ? "opacity-50 cursor-not-allowed" : ""
             }`}
             onClick={handleDelete}

@@ -29,7 +29,7 @@ const Products = () => {
       <div className="flex m-4 items-center gap-4">
         <Link
           to="/add-product"
-          className="max-w-max flex items-center gap-4 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5"
+          className="flex items-center gap-4 min-w-max rounded-full px-5 py-2.5 bg-zinc-900 text-white"
         >
           <PlusIcon /> Add Product
         </Link>
