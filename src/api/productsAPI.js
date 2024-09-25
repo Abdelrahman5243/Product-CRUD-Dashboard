@@ -10,23 +10,12 @@ const apiClient = axios.create({
   },
 });
 
-export const fetchProducts = async (category = "") => {
+export const fetchProducts = async () => {
   try {
-    const response = category
-      ? await apiClient.get(`/products?category=${category}`)
-      : await apiClient.get(`/products`);
+    const response = await apiClient.get(`/products`);
     return response.data;
   } catch (error) {
     throw new Error(`Error fetching products: ${error.message}`);
-  }
-};
-
-export const fetchProductsById = async (id) => {
-  try {
-    const response = await apiClient.get(`/products/${id}`);
-    return response.data;
-  } catch (error) {
-    throw new Error(`Error fetching product with ID ${id}: ${error.message}`);
   }
 };
 
@@ -35,9 +24,31 @@ export const createProduct = async (product) => {
     const response = await apiClient.post("/products", {
       ...product,
       rating: {
-        rate:0,
+        rate: 0,
         count: 0,
       },
+      sales: [
+        {
+          month: "January",
+          units_sold: 0,
+          revenue: 0,
+        },
+        {
+          month: "February",
+          units_sold: 0,
+          revenue: 0,
+        },
+      ],
+      orders: [
+        {
+          month: "January",
+          units_ordered: 0,
+        },
+        {
+          month: "February",
+          units_ordered: 0,
+        },
+      ],
     });
     return response.data;
   } catch (error) {

@@ -1,14 +1,12 @@
 import React from "react";
 import ProductForm from "../components/products/ProductForm";
-import { useNavigate } from "react-router-dom";
-import useProducts from "../hooks/useProducts";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../features/thunks";
 
 const AddProduct = () => {
-  const navigate = useNavigate();
-  const { addProduct } = useProducts();
+  const dispatch = useDispatch();
   const handleAddProduct = async (productData) => {
-    await addProduct(productData);
-    navigate("/");
+    dispatch(addProduct(productData));
   };
 
   return (

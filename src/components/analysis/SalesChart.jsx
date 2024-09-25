@@ -1,34 +1,34 @@
 import React from "react";
 import {
+  BarChart,
+  CartesianGrid,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
   Legend,
+  Bar,
   ResponsiveContainer,
-  LineChart,
-  Line,
+  Tooltip,
 } from "recharts";
 
-const RatingCharts = ({ data = [] }) => {
+const SalesChart = ({ data = [] }) => {
 
   return (
     <div className="p-8 pl-0 bg-white rounded-lg shadow-md shadow-gray-200">
       <h2 className="font-medium text-gray-700 pl-8 mb-4 text-lg">
-        Average Product Ratings
+        Total Sales by Product
       </h2>
       <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={data}>
+        <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis type="number" domain={[0, 5]} />
+          <YAxis type="number" domain={[0, "dataMax"]} />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="averageRating" stroke="#ffc658" />
-        </LineChart>
+          <Bar dataKey="sales" fill="#82ca9d" />
+        </BarChart>
       </ResponsiveContainer>
     </div>
   );
 };
 
-export default RatingCharts;
+export default SalesChart;

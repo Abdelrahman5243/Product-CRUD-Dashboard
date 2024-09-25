@@ -2,21 +2,21 @@ import { useState } from "react";
 import { InputField, SelectField, TextAreaField } from "./FormFields";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ProductForm = ({
   onSubmit,
-  initialData,
+  initialData = {},
   updateProduct,
   handleDelete,
 }) => {
-  const [title, setTitle] = useState(initialData?.title || "");
-  const [price, setPrice] = useState(initialData?.price || "");
-  const [description, setDescription] = useState(
-    initialData?.description || ""
-  );
-  const [image, setImage] = useState(initialData?.image || "");
+  const { categories } = useSelector((state) => state.products);
+  const [title, setTitle] = useState(initialData.title || "");
+  const [price, setPrice] = useState(initialData.price || "");
+  const [description, setDescription] = useState(initialData.description || "");
+  const [image, setImage] = useState(initialData.image || "");
   const [category, setCategory] = useState(
-    initialData?.category || "men's clothing"
+    initialData.category || "men's clothing"
   );
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -31,11 +31,24 @@ const ProductForm = ({
       return;
     }
 
+ const numericPrice = parseFloat(price);
+ if (isNaN(numericPrice) || numericPrice <= 0) {
+   setError("Price must be a positive number.");
+   return;
+ }
+
     setError(null);
     setLoading(true);
 
     try {
-      await onSubmit({ title, price, description, image, category });
+      await onSubmit({
+        ...initialData,
+        title,
+        price,
+        description,
+        image,
+        category,
+      });
       swal("Success!", "Product has been saved.", "success");
       navigate("/");
     } catch (err) {
@@ -76,12 +89,7 @@ const ProductForm = ({
           label="Category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          options={[
-            { value: "men's clothing", label: "Men's clothing" },
-            { value: "women's clothing", label: "Women's clothing" },
-            { value: "jewelery", label: "Jewelry" },
-            { value: "electronics", label: "Electronics" },
-          ]}
+          options={categories}
         />
         <TextAreaField
           id="description"
@@ -113,8 +121,8 @@ const ProductForm = ({
             type="button"
             className={`p-3 text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 
               focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm text-center ${
-              loading ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+                loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             onClick={handleDelete}
             disabled={loading}
           >

@@ -1,26 +1,48 @@
-import {useEffect} from "react";
-import useProducts from "../hooks/useProducts";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import {Loading} from "../components/common/Loading";
-import {Error} from "../components/common/Error";
+import { useDispatch, useSelector } from "react-redux";
+import { Error } from "../components/common";
 import { StarIcon } from "lucide-react";
+import { removeProduct } from "../features/thunks";
+import swal from "sweetalert";
 
 const ProductDetails = () => {
   const { productID } = useParams();
   const navigate = useNavigate();
-  const { product, loading, error, removeProduct, getProductById } = useProducts(null, productID);
+  const dispatch = useDispatch();
+
+  const product = useSelector((state) =>
+    state.products.products.find((p) => p.id === Number(productID))
+  );
+  const { status, error } = useSelector((state) => state.products);
+
+  if (status === "failed") return <Error message={error} />;
+  if (!product)
+    return (
+      <Error
+        title="Product not found"
+        message="The Product you are looking for doesn't exist."
+      />
+    );
 
   const handleDelete = async () => {
-    await removeProduct(productID);
-    navigate("/");
+    const willDelete = await swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this product!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    });
+
+    if (willDelete) {
+      try {
+        await dispatch(removeProduct(product.id)).unwrap();
+        swal("Deleted!", "Product has been deleted.", "success");
+        navigate("/");
+      } catch (error) {
+        swal("Error!", error.message, "error");
+      }
+    }
   };
-
-  useEffect(() => {
-    getProductById(productID); 
-  }, [productID]);
-
-  if (loading) return <Loading />;
-  if (!product || error) return <Error message={error || "Product not found"} />;
 
   return (
     <section className="py-8 md:py-16 dark:bg-gray-900 antialiased">
@@ -60,7 +82,9 @@ const ProductDetails = () => {
               </button>
             </div>
             <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
-            <p className="mb-6 text-gray-500 dark:text-gray-400">{product.description}</p>
+            <p className="mb-6 text-gray-500 dark:text-gray-400">
+              {product.description}
+            </p>
           </div>
         </div>
       </div>

@@ -43,9 +43,9 @@ export const SelectField = ({ id, label, value, onChange, options }) => (
       onChange={onChange}
       required
     >
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
+      {options.map((option,index) => (
+        <option key={option} value={option}>
+          {option}
         </option>
       ))}
     </select>
