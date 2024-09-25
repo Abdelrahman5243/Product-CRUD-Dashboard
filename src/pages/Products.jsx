@@ -6,7 +6,7 @@ import ProductTable from "../components/products/ProductTable";
 import { Error } from "../components/common";
 import { removeProduct } from "../features/thunks";
 import { getProductsByCategory } from "../features/utils";
-import swal from "sweetalert"; 
+import swal from "sweetalert";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -25,25 +25,6 @@ const Products = () => {
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-  };
-
-  const handleRemoveProduct = async (id) => {
-    const willDelete = await swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this product!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    });
-
-    if (willDelete) {
-      try {
-        await dispatch(removeProduct(id)).unwrap();
-        swal("Deleted!", "Product has been deleted.", "success");
-      } catch (error) {
-        swal("Error!", error.message, "error");
-      }
-    }
   };
 
   if (error) {
@@ -81,10 +62,7 @@ const Products = () => {
           ))}
         </select>
       </div>
-      <ProductTable
-        products={filterProducts}
-        removeProduct={handleRemoveProduct}
-      />
+      <ProductTable products={filterProducts} />
     </div>
   );
 };

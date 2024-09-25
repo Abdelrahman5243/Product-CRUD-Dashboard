@@ -4,12 +4,7 @@ import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ProductForm = ({
-  onSubmit,
-  initialData = {},
-  updateProduct,
-  handleDelete,
-}) => {
+const ProductForm = ({ onSubmit, initialData = {}, updateProduct }) => {
   const { categories } = useSelector((state) => state.products);
   const [title, setTitle] = useState(initialData.title || "");
   const [price, setPrice] = useState(initialData.price || "");
@@ -31,11 +26,11 @@ const ProductForm = ({
       return;
     }
 
- const numericPrice = parseFloat(price);
- if (isNaN(numericPrice) || numericPrice <= 0) {
-   setError("Price must be a positive number.");
-   return;
- }
+    const numericPrice = parseFloat(price);
+    if (isNaN(numericPrice) || numericPrice <= 0) {
+      setError("Price must be a positive number.");
+      return;
+    }
 
     setError(null);
     setLoading(true);
@@ -89,7 +84,12 @@ const ProductForm = ({
           label="Category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          options={categories}
+          options={[
+            { value: "men's clothing", label: "Men's clothing" },
+            { value: "women's clothing", label: "Women's clothing" },
+            { value: "jewelery", label: "Jewelry" },
+            { value: "electronics", label: "Electronics" },
+          ]}
         />
         <TextAreaField
           id="description"
@@ -115,20 +115,6 @@ const ProductForm = ({
             ? "Update product"
             : "Add product"}
         </button>
-
-        {updateProduct && handleDelete && (
-          <button
-            type="button"
-            className={`p-3 text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 
-              focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm text-center ${
-                loading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-            onClick={handleDelete}
-            disabled={loading}
-          >
-            {loading ? "Loading..." : "Delete"}
-          </button>
-        )}
       </div>
 
       {error && <div className="text-red-600">{error}</div>}

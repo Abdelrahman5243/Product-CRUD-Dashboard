@@ -1,7 +1,8 @@
 import { StarIcon } from "lucide-react";
 import { Link } from "react-router-dom";
+import DeleteButton from "./DeleteButton";
 
-const ProductRow = ({ product, onDelete }) => {
+const ProductRow = ({ product }) => {
   return (
     <tr className="bg-white border-b hover:bg-gray-50">
       <th
@@ -25,12 +26,10 @@ const ProductRow = ({ product, onDelete }) => {
         >
           Edit
         </Link>
-        <button
-          onClick={() => onDelete(product.id)}
+        <DeleteButton
+          productId={product.id}
           className="font-medium text-red-600 hover:underline"
-        >
-          Delete
-        </button>
+        />
       </td>
       <td className="px-6 py-4">
         <Link

@@ -1,13 +1,14 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import { removeProduct } from "../features/thunks"; 
+import { removeProduct } from "../../features/thunks"; 
 
-const useHandleDelete = () => {
+const DeleteButton = ({ productId, className }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleDelete = async (productId) => {
+  const handleDelete = async () => {
     const willDelete = await swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this product!",
@@ -27,7 +28,11 @@ const useHandleDelete = () => {
     }
   };
 
-  return handleDelete;
+  return (
+    <button onClick={handleDelete} className={`btn ${className}`}>
+      Delete Product
+    </button>
+  );
 };
 
-export default useHandleDelete;
+export default DeleteButton;

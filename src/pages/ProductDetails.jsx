@@ -1,15 +1,10 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Error } from "../components/common";
 import { StarIcon } from "lucide-react";
-import { removeProduct } from "../features/thunks";
-import swal from "sweetalert";
 
 const ProductDetails = () => {
   const { productID } = useParams();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const product = useSelector((state) =>
     state.products.products.find((p) => p.id === Number(productID))
   );
@@ -23,26 +18,6 @@ const ProductDetails = () => {
         message="The Product you are looking for doesn't exist."
       />
     );
-
-  const handleDelete = async () => {
-    const willDelete = await swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this product!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    });
-
-    if (willDelete) {
-      try {
-        await dispatch(removeProduct(product.id)).unwrap();
-        swal("Deleted!", "Product has been deleted.", "success");
-        navigate("/");
-      } catch (error) {
-        swal("Error!", error.message, "error");
-      }
-    }
-  };
 
   return (
     <section className="py-8 md:py-16 dark:bg-gray-900 antialiased">
@@ -74,12 +49,6 @@ const ProductDetails = () => {
               >
                 Edit
               </Link>
-              <button
-                onClick={handleDelete}
-                className="text-white sm:mt-0 bg-red-600 hover:bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5"
-              >
-                Delete
-              </button>
             </div>
             <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
             <p className="mb-6 text-gray-500 dark:text-gray-400">
