@@ -2,7 +2,7 @@ import React from "react";
 
 const InfoBox = ({ title, value, progress, icon, color }) => {
   return (
-    <div className="info-box flex flex-col justify-between gap-4 p-6 py-8 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl">
+    <div className="info-box flex flex-col justify-between gap-4 p-6 py-8 bg-white rounded-lg shadow transition-transform transform hover:scale-105 hover:shadow-lg">
       <div className="flex items-center gap-4">
         <div
           className={`info-box-icon flex-shrink-0 w-16 h-16 rounded-full flex justify-center items-center ${color} bg-opacity-15 p-4`}
