@@ -46,11 +46,11 @@ const Products = () => {
 
   return (
     <>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <div className="flex m-4 items-center gap-4">
+      <div className="relative overflow-x-auto  border border-gray-200 sm:rounded-lg">
+        <div className="flex m-4 items-center gap-4 flex-wrap">
           <Link
             to="/add-product"
-            className="flex items-center gap-4 min-w-max rounded-full px-5 py-2.5 bg-zinc-900 text-white"
+            className="flex items-center gap-4 w-full sm:max-w-max rounded-full px-5 py-2.5 bg-zinc-900 text-white"
           >
             <PlusIcon /> Add Product
           </Link>
@@ -61,7 +61,7 @@ const Products = () => {
             id="category"
             value={selectedCategory}
             onChange={(e) => handleCategoryChange(e.target.value)}
-            className="max-w-max bg-white border border-gray-300 cursor-pointer px-4 py-2.5 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block"
+            className="w-full sm:max-w-max bg-white border border-gray-300 cursor-pointer px-4 py-2.5 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block"
           >
             <option value="">All Categories</option>
             {categories.map((category, index) => (
