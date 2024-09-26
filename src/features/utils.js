@@ -135,11 +135,17 @@ export const getAverageRatingData = (productData) => {
     averageRating: product.rating.rate,
   }));
 };
-
 export const totalSales = (productData) => {
   return productData.reduce(
     (acc, product) =>
       acc + product.sales.reduce((sum, sale) => sum + sale.units_sold, 0),
+    0
+  );
+};
+export const totalOrders = (productData) => {
+  return productData.reduce(
+    (acc, product) =>
+      acc + product.orders.reduce((sum, order) => sum + order.units_ordered, 0),
     0
   );
 };

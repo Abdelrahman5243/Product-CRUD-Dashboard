@@ -6,6 +6,7 @@ import {
   getSalesData,
   getOrderData,
   getAverageRatingData,
+  totalOrders,
   totalSales,
   totalRevenue,
   averageRating,
@@ -30,19 +31,20 @@ const AnalysisPage = () => {
 
   return (
     <>
-      <h2 className="mb-4 text-xl px-6 font-bold text-gray-900 dark:text-white">
+      <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
         Products Analysis
       </h2>
 
       <InfoBoxes
         totalProducts={products.length}
         totalSales={totalSales(products)}
+        totalOrders={totalOrders(products)}
         totalRevenue={totalRevenue(products)}
         averageRating={averageRating(products)}
       />
 
       <Suspense fallback={<Loading />}>
-        <div className="mt-16 grid grid-cols-1 gap-8 2xl:grid-cols-3 xl:grid-cols-2 px-6">
+        <div className="mt-16 grid grid-cols-1 gap-8 2xl:grid-cols-3 xl:grid-cols-2">
           {products.length === 0 || error ? (
             <Error
               title="No Products Available"

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import { removeProduct } from "../../features/thunks"; 
+import { removeProduct } from "../../features/thunks";
 
 const DeleteButton = ({ productId, className }) => {
   const dispatch = useDispatch();
@@ -29,8 +29,12 @@ const DeleteButton = ({ productId, className }) => {
   };
 
   return (
-    <button onClick={handleDelete} className={`btn ${className}`}>
-      Delete Product
+    <button
+      onClick={handleDelete}
+      title="Delete product"
+      className={`btn ${className}`}
+    >
+      Delete
     </button>
   );
 };

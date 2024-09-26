@@ -6,11 +6,16 @@ const ProductTable = ({ products }) => {
       <thead className="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
           {[
+            "image",
             "Product Name",
             "Price",
+            "Revenues",
+            "Sales",
+            "Orders",
             "Category",
             "Rating",
-            "Action",
+            "Edit",
+            "Delete",
             "View",
           ].map((item, index) => (
             <th scope="col" className="px-6 py-3" key={index}>
@@ -22,10 +27,7 @@ const ProductTable = ({ products }) => {
       <tbody>
         {products.length > 0 ? (
           products.map((product) => (
-            <ProductRow
-              key={product.id}
-              product={product}
-            />
+            <ProductRow key={product.id} product={product} />
           ))
         ) : (
           <tr>
