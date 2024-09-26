@@ -10,11 +10,13 @@ const InfoBox = ({ title, value, progress, icon, color }) => {
           {icon}
         </div>
         <div className="info-box-content">
-          <h4 className="text-lg font-semibold text-gray-800 transition-colors duration-200 hover:text-blue-600">
+          <h4 className="text-sm font-semibold text-gray-800 transition-colors duration-200 hover:text-blue-600">
             {title}
           </h4>
           {value && (
-            <p className="mt-1 text-2xl font-bold text-gray-800">{value}</p>
+            <p className="mt-1 text-base font-bold text-gray-800">
+              {value}
+            </p>
           )}
         </div>
       </div>

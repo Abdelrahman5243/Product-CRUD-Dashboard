@@ -46,7 +46,7 @@ const Products = () => {
 
   return (
     <>
-      <div className="relative overflow-x-auto  border border-gray-200 sm:rounded-lg">
+      <div className="relative overflow-x-auto border border-gray-200 rounded-lg">
         <div className="flex m-4 items-center gap-4 flex-wrap">
           <Link
             to="/add-product"

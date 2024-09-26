@@ -9,7 +9,7 @@ const MainLayout = () => {
         <Header />
         <div className="flex flex-1 bg-gray-100 dark:bg-gray-900">
           <Sidebar />
-          <main className="container mx-auto p-12 overflow-x-hidden overflow-y-auto">
+          <main className="container mx-auto p-6 overflow-x-hidden overflow-y-auto">
             <Outlet />
           </main>
         </div>
