@@ -150,11 +150,13 @@ export const totalOrders = (productData) => {
   );
 };
 export const totalRevenue = (productData) => {
-  return productData.reduce(
-    (acc, product) =>
-      acc + product.sales.reduce((sum, sale) => sum + sale.revenue, 0),
-    0
-  );
+  return productData
+    .reduce(
+      (acc, product) =>
+        acc + product.sales.reduce((sum, sale) => sum + sale.revenue, 0),
+      0
+    )
+    .toFixed(2);
 };
 export const averageRating = (productData) => {
   return (
