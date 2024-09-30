@@ -18,9 +18,9 @@ const Pagination = ({
   return (
     <div
       aria-label="Pagination Navigation"
-      className="flex justify-between items-center py-6"
+      className="flex justify-center gap-12 items-center py-6"
     >
-      <span className="text-gray-700 font-medium text-sm md:text-base">
+      <span className="hidden md:flex text-gray-700 font-medium text-sm md:text-base">
         Page <span className="font-bold text-blue-600">{currentPage}</span> of{" "}
         <span className="font-bold">{totalPages}</span>
       </span>
