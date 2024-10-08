@@ -16,25 +16,17 @@ const Pagination = ({
   };
 
   return (
-    <div
-      aria-label="Pagination Navigation"
-      className="flex justify-center gap-12 items-center py-6"
-    >
-      <span className="hidden md:flex text-gray-700 font-medium text-sm md:text-base">
-        Page <span className="font-bold text-blue-600">{currentPage}</span> of{" "}
-        <span className="font-bold">{totalPages}</span>
-      </span>
-
+    <div className="flex justify-center items-center py-6">
       <ul className="flex items-center space-x-1 text-sm">
         <li>
           <button
             onClick={handlePrevious}
             disabled={currentPage === 1}
-            className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 ${
-              currentPage === 1 ? "cursor-not-allowed opacity-50" : ""
+            className={`flex items-center px-4 py-2 mx-1 text-gray-500 bg-white rounded-md dark:bg-gray-800 dark:text-gray-600 ${
+              currentPage === 1 ? "cursor-not-allowed opacity-50" : "hover:bg-blue-600 hover:text-white dark:hover:bg-blue-500"
             }`}
           >
-            <ChevronLeft />
+            <ChevronLeft /> Previous
           </button>
         </li>
 
@@ -43,10 +35,10 @@ const Pagination = ({
             <li key={page}>
               <button
                 onClick={() => handlePageChange(page)}
-                className={`flex items-center justify-center px-3 h-8 leading-tight border ${
+                className={`hidden sm:flex items-center px-4 py-2 mx-1 transition-colors duration-300 transform rounded-md ${
                   currentPage === page
-                    ? "text-blue-600 font-bold bg-gray-100 border-blue-300"
-                    : "text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                    ? "bg-blue-600 text-white"
+                    : "bg-white text-gray-700 hover:bg-blue-600 hover:text-white"
                 }`}
               >
                 {page}
@@ -59,11 +51,11 @@ const Pagination = ({
           <button
             onClick={handleNext}
             disabled={currentPage === totalPages}
-            className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 ${
-              currentPage === totalPages ? "cursor-not-allowed opacity-50" : ""
+            className={`flex items-center px-4 py-2 mx-1 text-gray-500 bg-white rounded-md dark:bg-gray-800 dark:text-gray-200 ${
+              currentPage === totalPages ? "cursor-not-allowed opacity-50" : "hover:bg-blue-600 hover:text-white dark:hover:bg-blue-500"
             }`}
           >
-            <ChevronRight />
+            Next <ChevronRight />
           </button>
         </li>
       </ul>

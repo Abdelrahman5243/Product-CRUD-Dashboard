@@ -23,50 +23,72 @@ select option {
 }
 
 .loader {
-  --uib-size: 80px;
-  --uib-color: black;
-  --uib-speed: 1.4s;
-  --uib-stroke: 5px;
-  --uib-bg-opacity: 0.1;
+  --uib-size: 40px;
+  --uib-color: rgb(237, 143, 42);
+  --uib-speed: 1.3s;
+  --uib-dot-size: 25%;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: var(--uib-stroke);
+  display: inline-block;
+  height: var(--uib-size);
   width: var(--uib-size);
-  border-radius: calc(var(--uib-stroke) / 2);
-  overflow: hidden;
-  transform: translate3d(0, 0, 0);
+  animation: spin var(--uib-speed) infinite linear;
 }
 
-.loader::before {
-  content: "";
+.dot {
+  position: absolute;
+  left: calc(50% - var(--uib-dot-size) / 2);
+  height: 100%;
+  width: var(--uib-dot-size);
+}
+
+.dot:after {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 0%;
   width: 100%;
+  padding-bottom: 100%;
   background-color: var(--uib-color);
-  opacity: var(--uib-bg-opacity);
+  border-radius: 50%;
   transition: background-color 0.3s ease;
 }
 
-.loader::after {
-  content: "";
-  height: 100%;
-  width: 100%;
-  border-radius: calc(var(--uib-stroke) / 2);
-  animation: zoom var(--uib-speed) ease-in-out infinite;
-  transform: translateX(-100%);
-  background-color: var(--uib-color);
-  transition: background-color 0.3s ease;
+.dot:nth-child(1) {
+  transform: rotate(120deg);
 }
 
-@keyframes zoom {
+.dot:nth-child(1)::after {
+  animation: wobble var(--uib-speed) infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+  transform: rotate(-120deg);
+}
+
+.dot:nth-child(2)::after {
+  animation: wobble var(--uib-speed) infinite ease-in-out;
+}
+
+.dot:nth-child(3)::after {
+  animation: wobble var(--uib-speed) infinite ease-in-out;
+}
+
+@keyframes spin {
   0% {
-    transform: translateX(-100%);
+    transform: rotate(0deg);
   }
   100% {
-    transform: translateX(100%);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(65%);
   }
 }

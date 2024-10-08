@@ -6,6 +6,7 @@ const Products = lazy(() => import("./pages/Products"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 const EditProduct = lazy(() => import("./pages/EditProduct"));
 const AnalysisPage = lazy(() => import("./pages/AnalysisPage"));
+import NotFound from "./pages/NotFound";
 import { Loading, Error } from "./components/common";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "./features/thunks";
@@ -46,6 +47,8 @@ const App = () => {
           <Route path="edit-product/:productID" element={<EditProduct />} />
           <Route path="product/:productID" element={<ProductDetails />} />
         </Route>
+        <Route path="*" element={<NotFound />}/> 
+
       </Routes>
     </Suspense>
   );
